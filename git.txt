@@ -1,0 +1,16 @@
+git clone https://github.com/Ouzy012/bilbao-project.git
+git init https://github.com/Ouzy012/bilbao-project.git
+
+git branch nom_de_la_branch
+git checkout nom_de_la_branch
+git add .
+git commit -m "description"
+git push
+
+git pull origin main
+
+//faire la migration des tables a partir de laravel sur mysql apres avoir cree la base de donnee
+php artisan migrate
+
+//genere une cle
+php artisan key:generate
