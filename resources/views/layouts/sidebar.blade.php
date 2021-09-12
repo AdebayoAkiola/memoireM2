@@ -23,7 +23,7 @@
         <li>
             <ul class="collapsible collapsible-accordion">
 
-               {{-- @if (session('the_user')[0]->profil == 'Caissier')****************************--}}
+                @if (session('the_user')[0]->profil == 'Administrateur')
 
                     {{-- Chauffeurs --}}
                     <li>
@@ -39,22 +39,10 @@
                                 <li>
                                     <a href="{{ route('chauffeur.index') }}" class="waves-effect">Lister</a>
                                 </li>
-
-                               {{-- <li>
-                                    <a href="{{ url('vente/voir') }}" class="waves-effect">Voir une vente</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect">Statistiques</a>
-                                </li>   --}}
                             </ul>
                         </div>
                     </li>
 
-                  {{--  <li>
-                        <a href="{{ url('ma-boutique') }}" class="collapsible-header waves-effect">
-                            <i class="w-fa far fa-bell"></i>Ma boutique</a>
-                    </li>--}}
-                    {{--@elseif (session('the_user')[0]->profil == 'Gerant')******************************--}}
                     {{-- Transporteurs --}}
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -70,12 +58,6 @@
                                 <li>
                                     <a href="{{ route('transporteur.index') }}" class="waves-effect">Lister</a>
                                 </li>
-
-                               {{-- <li>
-                                    <a href="{{ url('depot/transferer-boutique') }}" class="waves-effect">
-                                        Transférer vers boutique
-                                    </a>
-                                </li> --}}
                             </ul>
                         </div>
                     </li>
@@ -98,12 +80,212 @@
                             </ul>
                         </div>
                     </li>
+                    {{-- Vehicule --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Nos Vehicules
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                       <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('vehicule.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('vehicule.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Courses --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fab fa-css3"></i>
+                            Voir les Courses
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('course.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('course.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Trajets --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Nos Trajets
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('trajet.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('trajet.index') }}" class="waves-effect">Lister</a>
+                                </li>
 
-                   {{-- <li>
-                        <a href="{{ url('mon-depot', session('the_affectation')[0]->id ) }}" class="collapsible-header waves-effect">
-                            <i class="w-fa far fa-bell"></i>Mon dépôt</a>
-                    </li>   --}}
-                {{--@else*****************************************************--}}
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Reservations --}}
+                     <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-shopping-cart"></i>
+                            Reservations de course
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('reservation.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('reservation.index') }}" class="waves-effect">Lister</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                @elseif (session('the_user')[0]->profil == 'Chauffeur')
+
+                    {{-- Chauffeurs --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-user"></i>
+                            Nos Chauffeurs
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('chauffeur.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('chauffeur.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Vehicule --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Nos Vehicules
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                       <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('vehicule.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('vehicule.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Courses --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fab fa-css3"></i>
+                            Voir les Courses
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('course.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('course.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Trajets --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Nos Trajets
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('trajet.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('trajet.index') }}" class="waves-effect">Lister</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Reservations --}}
+                     <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-shopping-cart"></i>
+                            Reservations de course
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('reservation.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('reservation.index') }}" class="waves-effect">Lister</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                @elseif (session('the_user')[0]->profil == 'Transporteur')
+
+
+                    {{-- Transporteurs --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-user"></i>
+                            Nos Transporteurs
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('transporteur.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('transporteur.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    {{-- Chauffeurs --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-user"></i>
+                            Nos Chauffeurs
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('chauffeur.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('chauffeur.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
                     {{-- Vehicule --}}
                     <li>
@@ -123,7 +305,62 @@
                             </ul>
                         </div>
                     </li>
+                @elseif (session('the_user')[0]->profil == 'Client')
 
+                    {{-- Chauffeurs --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-user"></i>
+                            Nos Chauffeurs
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('chauffeur.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('chauffeur.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    {{-- Clients --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-user"></i>
+                            Nos Clients
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                       <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('client.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('client.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{-- Vehicule --}}
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Nos Vehicules
+                            <i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                       <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('vehicule.create') }}" class="waves-effect">Ajouter</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('vehicule.index') }}" class="waves-effect">Lister</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     {{-- Courses --}}
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -139,13 +376,9 @@
                                 <li>
                                     <a href="{{ route('course.index') }}" class="waves-effect">Lister</a>
                                 </li>
-                          {{--  <li>
-                                    <a href="{{ url('stock-boutique') }}" class="waves-effect">Stock boutique</a>
-                                </li>   --}}
                             </ul>
                         </div>
                     </li>
-
                     {{-- Trajets --}}
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -161,14 +394,11 @@
                                 <li>
                                     <a href="{{ route('trajet.index') }}" class="waves-effect">Lister</a>
                                 </li>
-                              {{--  <li>
-                                    <a href="{{ url('stock-depot') }}" class="waves-effect">Stock dépôt</a>
-                                </li>   --}}
+
                             </ul>
                         </div>
                     </li>
-
-                     {{-- Reservations --}}
+                    {{-- Reservations --}}
                      <li>
                         <a class="collapsible-header waves-effect arrow-r">
                             <i class="fas fa-shopping-cart"></i>
@@ -183,14 +413,12 @@
                                 <li>
                                     <a href="{{ route('reservation.index') }}" class="waves-effect">Lister</a>
                                 </li>
-                              {{--  <li>
-                                    <a href="{{ url('stock-depot') }}" class="waves-effect">Stock dépôt</a>
-                                </li>   --}}
+
                             </ul>
                         </div>
                     </li>
 
-                {{--@endif******************************************--}}
+                @endif
             </ul>
         </li>
         <!--/. Side navigation links -->
