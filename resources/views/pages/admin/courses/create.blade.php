@@ -30,15 +30,11 @@
                                 <p class="slogan">Saisir les informations de la course</p>
 
                                 <div class="md-form md-outline">
-                                    <input type="text" id="trajet" name="trajet" class="form-control">
-                                    <label for="trajet">Choisir un trajet</label>
-                                    @error('trajet')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <input type="hidden"  name="trajet" value="{{$get_trajet[0]->id}}" class="form-control">
                                 </div>
 
                                 <div class="md-form md-outline">
-                                    <input type="date" id="datedepart" name="datedepart" class="form-control">
+                                    <input type="date"  id="datedepart" min="{{date('Y-m-d')}}" name="datedepart" class="form-control">
                                     <label for="datedepart">Date de depart</label>
                                     @error('datedepart')
                                         <span class="text-danger">{{ $message }}</span>

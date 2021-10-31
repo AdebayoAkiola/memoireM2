@@ -10,6 +10,6 @@ class Vehicule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'immatriculation', 'nombre_de_place', 'id_transporteur', 'etat', 'photo1', 'photo2', 'photo3','is_deleted'
+        'immatriculation','carte_grise', 'assurance', 'visite_technique', 'nombre_de_place', 'id_transporteur', 'etat', 'photo1', 'photo2', 'photo3','is_deleted','allocation'
     ];
 }

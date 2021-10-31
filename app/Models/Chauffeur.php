@@ -11,7 +11,7 @@ class Chauffeur extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'login', 'password', 'prenom', 'nom', 'telephone','email', 'etat', 'photo', 'note','id_transporteur','is_deleted'
+        'id', 'login', 'password', 'prenom', 'nom', 'permis','telephone','email', 'etat', 'photo', 'note','id_transporteur','is_deleted'
     ];
 
     public static function generateLogin($prenom, $nom)

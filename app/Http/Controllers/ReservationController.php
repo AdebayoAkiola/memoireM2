@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ReservationController extends Controller
 {
@@ -12,9 +14,45 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages/admin/reservations/index');
+        if((session('the_user')[0]->profil == "Client")){
+            $nomtrajet=Str::ucfirst($request->ville_depart.' ----->  '.$request->ville_darriver);
+            $courses = DB::table('courses')
+            ->join('vehicules', 'vehicules.id', '=', 'courses.id_vehicule')
+            ->join('chauffeurs', 'chauffeurs.id', '=', 'courses.id_chauffeur')
+            ->join('trajets', 'trajets.id', '=', 'courses.id_trajet')
+            /**->where('courses.id_vehicule', '=', 'vehicules.id')*/
+            ->where('trajets.nom_trajet', '=',  $nomtrajet)
+            ->where('courses.date_depart', '>=', date('Y-m-d'))
+            ->where('courses.is_deleted', '=', 0)
+
+            ->orderBy('date_depart', 'desc')
+            ->get(
+                [
+                    'courses.id','courses.date_depart', 'courses.heure_depart', 'courses.duree', 'courses.prix', 'courses.etat',
+                    'vehicules.immatriculation', 'vehicules.nombre_de_place', 'chauffeurs.nom', 'chauffeurs.prenom', 'trajets.nom_trajet'
+                ]
+            );
+            return view('pages/admin/reservations/index',compact('courses'));
+        }else{
+            $courses = DB::table('courses')
+            ->join('vehicules', 'vehicules.id', '=', 'courses.id_vehicule')
+            ->join('chauffeurs', 'chauffeurs.id', '=', 'courses.id_chauffeur')
+            ->join('trajets', 'trajets.id', '=', 'courses.id_trajet')
+            /**->where('courses.id_vehicule', '=', 'vehicules.id')
+            ->where('courses.id_trajet', '=', 'chauffeurs.id')*/
+            ->where('courses.is_deleted', '=', 0)
+
+            ->orderBy('date_depart', 'desc')
+            ->get(
+                [
+                    'courses.id','courses.date_depart', 'courses.heure_depart', 'courses.duree', 'courses.prix', 'courses.etat',
+                    'vehicules.immatriculation', 'vehicules.nombre_de_place', 'chauffeurs.nom', 'chauffeurs.prenom', 'trajets.nom_trajet'
+                ]
+            );
+            return view('pages/admin/reservations/index',compact('courses'));
+        }
     }
 
     /**
@@ -22,9 +60,10 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pages/admin/reservations/create');
+        $id_course=$request->id;
+        return view('pages/admin/reservations/create',compact('id_course'));
     }
 
     /**
@@ -41,8 +80,8 @@ class ReservationController extends Controller
             'point_depart' => $request->point_depart,
             'point_darrivee' => $request->point_darrivee,
             'etat' => 'desactiver',
-            'id_course' => 1,
-            'id_client' => 1
+            'id_course' => $request->id_course,
+            'id_client' => session('the_user')[0]->id
         ]);
 
         return redirect()->route('reservation.index');

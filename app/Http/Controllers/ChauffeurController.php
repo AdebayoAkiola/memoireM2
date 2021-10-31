@@ -16,7 +16,24 @@ class ChauffeurController extends Controller
      */
     public function index()
     {
-        $chauffeurs = Chauffeur::where('is_deleted', 0)->orderBy('nom')->get();
+        if(session('the_user')[0]->profil == "Transporteur"){
+            $chauffeurs = DB::table('chauffeurs')
+            ->where('chauffeurs.is_deleted', 0)
+            ->where('chauffeurs.id_transporteur', session('the_user')[0]->id)
+            ->get([
+                'id', 'login', 'prenom', 'note',
+                'nom', 'is_deleted', 'etat',
+                'telephone', 'photo', 'email'
+            ]);
+        }else{
+            $chauffeurs = DB::table('chauffeurs')
+            ->where('is_deleted', 0)
+            ->orderBy('nom')
+            ->get([
+                'id', 'login', 'prenom', 'note',
+                'nom', 'is_deleted', 'etat',
+                'telephone', 'photo', 'email'
+            ]);}
         return view('pages/admin/chauffeurs/index', compact('chauffeurs'));
     }
 

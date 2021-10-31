@@ -132,7 +132,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <div class="md-form mb-0">
-                                                <input type="text" id="date_depart" name="date_depart"
+                                                <input type="date" id="date_depart" min="{{date('Y-m-d')}}"name="date_depart"
                                                     class="form-control @error('date_depart') validate @enderror"
                                                     value="{{ $item->date_depart ?? old('date_depart', '') }}">
                                                 <label for="date_depart">Date depart</label>

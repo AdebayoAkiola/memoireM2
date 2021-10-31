@@ -27,10 +27,19 @@
                                     Immatriculation
                                 </th>
                                 <th class="th-sm">
+                                    carte grise
+                                </th>
+                                <th class="th-sm">
+                                    Assurance
+                                </th>
+                                <th class="th-sm">
+                                    Visite technique
+                                </th>
+                                <th class="th-sm">
                                     Nombre de place
                                 </th>
                                 <th class="th-sm">
-                                    Id transporteur
+                                    Transporteur
                                 </th>
                             </tr>
                         </thead>
@@ -41,8 +50,11 @@
                                 <td></td>
                                 <td>{{ $vehicule->id }}</td>
                                 <td>{{ $vehicule->immatriculation }}</td>
+                                <td>{{ $vehicule->carte_grise }}</td>
+                                <td>{{ $vehicule->assurance }}</td>
+                                <td>{{ $vehicule->visite_technique }}</td>
                                 <td>{{ $vehicule->nombre_de_place }}</td>
-                                <td>{{ $vehicule->id_transporteur }}</td>
+                                <td>{{ $vehicule->prenom }} {{ $vehicule->nom }}</td>
 
                                 <td class="form-inline">
                                     <a href="{{ route('vehicule.show', $vehicule->id) }}" class="btn btn-sm btn-primary"
@@ -64,7 +76,13 @@
                                         data-placement="top" title="Voir" class="text-primary">
                                         <i class="w-fa fas fa-user"></i>
                                     </a> -->
-
+                                    @if(session('the_user')[0]->profil =="Transporteur")
+                                        <a href="{{ route('vehicule.show', $vehicule->id) }}" class="btn btn-sm btn-success"
+                                            title="Attribuer a un chauffeur">
+                                            <i class="w-fa fas fa-user"></i>
+                                        </a>
+                                    @endif
+                                    @if(session('the_user')[0]->profil =="Administrateur")
                                     @if ($vehicule->etat == 'desactiver')
                                     <a href="{{ url('vehicule/status', [$vehicule->id]) }}"
                                         data-toggle="tooltip" data-placement="top" title="Activer"
@@ -90,7 +108,7 @@
                                         </a>
 
                                     @endif
-
+                                    @endif
                                 </td>
                                 {{--<td>
                                     <a

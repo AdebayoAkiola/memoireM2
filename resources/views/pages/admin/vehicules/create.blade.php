@@ -20,7 +20,7 @@
             <!-- Tab panels -->
             <div class="tab-content card">
                 <div class="tab-pane fade in show active" id="vehicule" role="tabpanel">
-                    <form action="{{ route('vehiculeStore.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('vehicule.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card card-signup z-depth-1">
 
@@ -44,6 +44,54 @@
                                     @error('nbplace')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                </div>
+
+                                <div class="md-form">
+                                    <div class="file-field">
+                                        <div class="btn btn-primary btn-sm float-left">
+                                            <span>Carte grise </span>
+                                            <input type="file" name="carte_grise" >
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" disabled
+                                                placeholder="Televerser votre carte grise">
+                                        </div>
+                                    @error('carte_grise')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                </div>
+
+                                <div class="md-form">
+                                    <div class="file-field">
+                                        <div class="btn btn-primary btn-sm float-left">
+                                            <span>Assurance </span>
+                                            <input type="file" name="assurance" >
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" disabled
+                                                placeholder="Televerser votre assurance">
+                                        </div>
+                                    @error('assurance')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                </div>
+
+                                <div class="md-form">
+                                    <div class="file-field">
+                                        <div class="btn btn-primary btn-sm float-left">
+                                            <span>Viste technique </span>
+                                            <input type="file" name="visite_technique" >
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" disabled
+                                                placeholder="Televerser la visite technique">
+                                        </div>
+                                    @error('visite_technique')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
                                 </div>
 
                                 <div class="md-form">

@@ -190,56 +190,6 @@
                                 <!-- Second row -->
                                 <div class="row">
 
-                                   {{-- @if ($item->profil == 'Caissier')
-                                        <div class="col-md-6">
-                                            <div class="md-form mb-0">
-                                                <input type="text" class="form-control validate"
-                                                    value="{{ $item->profil }}" disabled>
-                                                <label for="profil" data-error="wrong" data-success="right">Profil</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <select class="mdb-select md-form" name="boutique">
-                                                <option selected disabled value="{{ $item->affectation }}">{{ $item->nom_boutique }}</option>
-
-                                                @foreach ($boutiques as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->nom_boutique }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            <label>Boutique</label>
-
-                                            @error('boutique')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @else
-
-                                        <div class="col-md-6">
-                                            <div class="md-form mb-0">
-                                                <input type="text" class="form-control validate"
-                                                    value="{{ $item->profil }}" disabled>
-                                                <label for="profil" data-error="wrong" data-success="right">Profil</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <select class="mdb-select md-form" name="depot">
-                                                <option selected disabled value="{{ $item->affectation }}">{{ $item->nom_depot }}</option>
-
-                                                @foreach ($depots as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->nom_depot }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            <label>Dépôt</label>
-
-                                            @error('depot')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    @endif --}}
                                 </div>
                                 <!-- Second row -->
 

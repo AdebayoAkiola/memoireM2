@@ -20,16 +20,16 @@
             <!-- Tab panels -->
             <div class="tab-content card">
                 <div class="tab-pane fade in show active" id="chauffeur" role="tabpanel">
-                    <form action="{{ route('reservationStore.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('reserver') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card card-signup z-depth-1">
 
                             <div class="card-body text-center">
 
-                                <h3 class="card-title my-2">Reserver voir voiture de course en toute securite</h3>
+                                <h3 class="card-title my-2">Reserver votre voiture de course en toute securite</h3>
                                 <p class="slogan">Saisir les informations personnelles</p>
 
-
+                                <input type="hidden" name="id_course" class="form-control" value="{{$id_course}}">
                                 <div class="md-form md-outline">
                                     <input type="number" name="nombre_de_place" class="form-control" maxlength="3">
                                     <label for="nombre_de_place">Nombre de place</label>

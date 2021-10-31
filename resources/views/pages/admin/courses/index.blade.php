@@ -12,7 +12,7 @@
         <!-- Gird column -->
         <div class="col-md-12">
 
-            <h5 class="my-4 dark-grey-text font-weight-bold">Liste de l'ensemble des chauffeurs</h5>
+            <h5 class="my-4 dark-grey-text font-weight-bold">Liste de l'ensemble des courses</h5>
 
             <div class="card">
                 <div class="card-body">
@@ -61,9 +61,10 @@
                                 <td>{{ $course->prix }}</td>
                                 <td>{{ $course->immatriculation }}</td>
                                 <td>{{ $course->nombre_de_place  }}</td>
-                                <td>{{ $course->prenom  }} {{ $course->nom  }}</td>
+                                <td>{{ $course->prenom}} {{$course->nom}}</td>
                                 <td>{{ $course->nom_trajet }}</td>
                                 <td class="form-inline">
+                                    @if (session('the_user')[0]->profil == 'Chauffeur')
                                     <a href="{{ route('course.show', $course->id) }}" class="btn btn-sm btn-primary"
                                         title="Modifier">
                                         <i class="fas fa-edit fa-lg fa-fw"></i>
@@ -79,11 +80,15 @@
                                             </button>
                                         </form>
                                     </a>
-                                   <!-- <a href="{{ route('course.show', $course->id) }}" data-toggle="tooltip"
-                                        data-placement="top" title="Voir" class="text-primary">
-                                        <i class="w-fa fas fa-user"></i>
-                                    </a> -->
-
+                                    @endif
+                                    @if (session('the_user')[0]->profil == 'Client')
+                                        <a href="{{ url('reservationStore', $course->id) }}"
+                                                class="btn btn-sm btn-success text-white"
+                                                title="Reservation">
+                                                Reservation</i>
+                                        </a>
+                                    @endif
+                                    @if (session('the_user')[0]->profil == 'Administrateur')
                                     @if ($course->etat == 'desactiver')
                                     <a href="{{ url('course/status', [$course->id]) }}"
                                         data-toggle="tooltip" data-placement="top" title="Activer"
@@ -108,6 +113,7 @@
                                             <i class="w-fa fas fa-edit"></i>
                                         </a>
 
+                                    @endif
                                     @endif
 
                                 </td>

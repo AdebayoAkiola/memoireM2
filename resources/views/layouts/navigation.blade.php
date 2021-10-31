@@ -26,26 +26,6 @@
         <!--Navbar links-->
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
 
-            @if (session('the_affectation') != null)
-                <li class="nav-item">
-                    @if (session('the_user')[0]->profil == 'Caissier')
-                        <a href="{{ url('ma-boutique') }}" class="nav-link waves-effect">
-                            <span class="clearfix d-none d-sm-inline-block">
-                                {{ session('the_affectation')[0]->nom_boutique }}
-                            </span>
-                        </a>
-                    @elseif (session('the_user')[0]->profil == "Gerant")
-                        <a href="{{ url('mon-depot', session('the_affectation')[0]->id ) }}" class="nav-link waves-effect">
-                            <span class="clearfix d-none d-sm-inline-block">
-                                {{ session('the_affectation')[0]->nom_depot }}
-                            </span>
-                        </a>
-                    @endif
-
-                </li>
-            @endif
-
-
             <li class="nav-item">
                 <a class="nav-link waves-effect">
                     <span class="clearfix d-none d-sm-inline-block">
@@ -71,12 +51,12 @@
                         <a class="dropdown-item" href="{{ route('transporteur.show', session('the_user')[0]->id) }}">Mon
                             Compte</a>
                     @elseif (substr(session('the_user')[0]->login,0,2) == 'ad')
-                        <a class="dropdown-item" href="{{ route('administrateur.show', session('the_user')[0]->id) }}">Mon
+                        <a class="dropdown-item" href="{{ route('chauffeur.show', session('the_user')[0]->id) }}">Mon
                             Compte</a>
                     @else
                         <a class="dropdown-item" href="{{ route('client.show', session('the_user')[0]->id) }}">Mon
                             Compte</a>
-                        @endif
+                    @endif
                     <a class="dropdown-item" href="deconnexion">Déconnexion</a>
                 </div>
 

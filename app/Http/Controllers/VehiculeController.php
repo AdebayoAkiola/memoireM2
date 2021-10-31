@@ -16,7 +16,25 @@ class VehiculeController extends Controller
      */
     public function index()
     {
-        $vehicules = Vehicule::where('is_deleted', 0)->orderBy('id')->get();
+        if(session('the_user')[0]->profil == "Transporteur")
+            $vehicules = DB::table('vehicules')
+            ->join('transporteurs', 'transporteurs.id', '=', 'vehicules.id_transporteur')
+            ->where('vehicules.is_deleted', 0)
+            ->where('id_transporteur',session('the_user')[0]->id)
+            ->orderBy('id')
+             ->get([
+                 'vehicules.id',  'vehicules.immatriculation', 'vehicules.nombre_de_place', 'vehicules.carte_grise', 'vehicules.assurance', 'vehicules.visite_technique',
+                 'vehicules.id_transporteur', 'vehicules.etat', 'vehicules.photo1', 'vehicules.photo2', 'vehicules.photo3', 'transporteurs.prenom', 'transporteurs.nom'
+             ]);
+        else
+            $vehicules = DB::table('vehicules')
+            ->join('transporteurs', 'transporteurs.id', '=', 'vehicules.id_transporteur')
+            ->where('vehicules.is_deleted', 0)
+            ->orderBy('id')
+             ->get([
+                 'vehicules.id',  'vehicules.immatriculation', 'vehicules.nombre_de_place', 'vehicules.carte_grise', 'vehicules.assurance', 'vehicules.visite_technique',
+                 'vehicules.id_transporteur', 'vehicules.etat', 'vehicules.photo1', 'vehicules.photo2', 'vehicules.photo3', 'transporteurs.prenom', 'transporteurs.nom'
+             ]);
         return view('pages/admin/vehicules/index', compact('vehicules'));
     }
 
@@ -41,12 +59,16 @@ class VehiculeController extends Controller
         $vehicule = Vehicule::create([
             'immatriculation' => $request->immatriculation,
             'nombre_de_place' => $request->nbplace,
-            'id_transporteur' => 1,
+            'id_transporteur' => session('the_user')[0]->id,
             'etat' => 'desactiver',
             'photo1' => '',
             'photo2' => '',
             'photo3' => '',
-            'is_deleted' => 0
+            'carte_grise' => '',
+            'assurance' => '',
+            'visite_technique' => '',
+            'is_deleted' => 0,
+            'allocation' => 0
         ]);
 
         return redirect()->route('vehicule.index');

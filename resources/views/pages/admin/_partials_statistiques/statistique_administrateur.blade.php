@@ -13,8 +13,8 @@
                     <div class="admin-up">
                         <i class="far fa-money-bill-alt primary-color mr-3 z-depth-2"></i>
                         <div class="data">
-                            <p class="text-uppercase">Ventes</p>
-                            <h4 class="font-weight-bold dark-grey-text"> {{--{{ number_format($vente_jour, 3) }} F--}}prix</h4>
+                            <p class="text-uppercase">Course</p>
+                            <h4 class="font-weight-bold dark-grey-text"> {{--{{ number_format($vente_jour, 3) }} F--}}course</h4>
                         </div>
                     </div>
 
@@ -24,7 +24,7 @@
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="card-text">Vente du jour</p>
+                        <p class="card-text">Nombre de course journalier</p>
                     </div>
                 </a>
 
@@ -45,7 +45,7 @@
                     <div class="admin-up">
                         <i class="fas fa-chart-line warning-color mr-3 z-depth-2"></i>
                         <div class="data">
-                            <p class="text-uppercase">Articles</p>
+                            <p class="text-uppercase">Chauffeur</p>
                             <h4 class="font-weight-bold dark-grey-text"> {{--{{ $nombre_article }}--}}15 </h4>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="card-body card-body-cascade">
                         <div class="progress mb-3">
                         </div>
-                        <p class="card-text">Nombre d'articles disponible</p>
+                        <p class="card-text">Nombre de chauffeur</p>
                     </div>
                 </a>
             </div>
@@ -74,7 +74,7 @@
                     <div class="admin-up">
                         <i class="fas fa-chart-pie light-blue lighten-1 mr-3 z-depth-2"></i>
                         <div class="data">
-                            <p class="text-uppercase">Stocks dépôt</p>
+                            <p class="text-uppercase">Vehicules</p>
                             <h4 class="font-weight-bold dark-grey-text">{{--{{ $nombre_article_depot }}--}}5</h4>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             <div class="progress-bar red accent-2" role="progressbar" style="width: 75%"
                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="card-text">Nombre d'articles en stocks</p>
+                        <p class="card-text">Nombre de vehicule</p>
                     </div>
                 </a>
             </div>
@@ -100,12 +100,12 @@
 
             <!-- Card -->
             <div class="card card-cascade cascading-admin-card">
-                <a href="{{ route('boutique.index') }}">
+                <a href="#">
                     <!-- Card Data -->
                     <div class="admin-up">
                         <i class="fas fa-chart-bar red accent-2 mr-3 z-depth-2"></i>
                         <div class="data">
-                            <p class="text-uppercase">Boutiques</p>
+                            <p class="text-uppercase">Transporteurs</p>
                             <h4 class="font-weight-bold dark-grey-text">{{--{{ $nombre_boutiques }}--}}2</h4>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="card-text">Nombre de boutiques</p>
+                        <p class="card-text">Nombre de transporteurs</p>
                     </div>
                 </a>
             </div>
@@ -130,12 +130,12 @@
 
             <!-- Card -->
             <div class="card card-cascade cascading-admin-card">
-                <a href="{{ route('depot.index') }}">
+                <a href="#">
                     <!-- Card Data -->
                     <div class="admin-up">
                         <i class="fas fa-chart-bar green accent-2 mr-3 z-depth-2"></i>
                         <div class="data">
-                            <p class="text-uppercase">Dépôts</p>
+                            <p class="text-uppercase">Client</p>
                             <h4 class="font-weight-bold dark-grey-text">{{--{{ $nombre_depots }}--}}3</h4>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                             <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="card-text">Nombre de dépôts</p>
+                        <p class="card-text">Nombre de client</p>
                     </div>
                 </a>
             </div>

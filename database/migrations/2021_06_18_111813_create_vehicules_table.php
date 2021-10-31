@@ -16,6 +16,9 @@ class CreateVehiculesTable extends Migration
         Schema::create('vehicules', function (Blueprint $table) {
             $table->id();
             $table->string('immatriculation');
+            $table->string('carte_grise');
+            $table->string('assurance');
+            $table->string('visite_technique');
             $table->integer('nombre_de_place');
             $table->unsignedBigInteger('id_transporteur');
             $table->string('photo1');
@@ -23,6 +26,7 @@ class CreateVehiculesTable extends Migration
             $table->string('photo3');
             $table->enum('etat', ['desactiver', 'activer', 'suspendus']);
             $table->integer('is_deleted');
+            $table->integer('allocation');
             $table->timestamps();
 
         });

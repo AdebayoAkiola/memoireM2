@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -13,14 +14,15 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(session('the_user')[0]->profil == "Chauffeur"){
         $courses = DB::table('courses')
         ->join('vehicules', 'vehicules.id', '=', 'courses.id_vehicule')
         ->join('chauffeurs', 'chauffeurs.id', '=', 'courses.id_chauffeur')
         ->join('trajets', 'trajets.id', '=', 'courses.id_trajet')
-        /**->where('courses.id_vehicule', '=', 'vehicules.id')
-        ->where('courses.id_chauffeur', '=', 'chauffeurs.id')*/
+       /* ->where('courses.id_vehicule', '=', 'vehicules.id')*/
+        ->where('courses.id_chauffeur', '=', session('the_user')[0]->id)
         ->where('courses.is_deleted', '=', 0)
 
         ->orderBy('date_depart', 'desc')
@@ -30,7 +32,41 @@ class CourseController extends Controller
                 'vehicules.immatriculation', 'vehicules.nombre_de_place', 'chauffeurs.nom', 'chauffeurs.prenom', 'trajets.nom_trajet'
             ]
         );
+        } else if((session('the_user')[0]->profil == "Client")){
+            $nomtrajet=Str::ucfirst($request->ville_depart.' ----->  '.$request->ville_darriver);
+            $courses = DB::table('courses')
+            ->join('vehicules', 'vehicules.id', '=', 'courses.id_vehicule')
+            ->join('chauffeurs', 'chauffeurs.id', '=', 'courses.id_chauffeur')
+            ->join('trajets', 'trajets.id', '=', 'courses.id_trajet')
+            /**->where('courses.id_vehicule', '=', 'vehicules.id')*/
+            ->where('trajets.nom_trajet', '=',  $nomtrajet)
+            ->where('courses.date_depart', '>=', date('Y-m-d'))
+            ->where('courses.is_deleted', '=', 0)
 
+            ->orderBy('date_depart', 'desc')
+            ->get(
+                [
+                    'courses.id','courses.date_depart', 'courses.heure_depart', 'courses.duree', 'courses.prix', 'courses.etat',
+                    'vehicules.immatriculation', 'vehicules.nombre_de_place', 'chauffeurs.nom', 'chauffeurs.prenom', 'trajets.nom_trajet'
+                ]
+            );
+            return view('pages/admin/courses/index',compact('courses'));
+        } {
+            $courses = DB::table('courses')
+        ->join('vehicules', 'vehicules.id', '=', 'courses.id_vehicule')
+        ->join('chauffeurs', 'chauffeurs.id', '=', 'courses.id_chauffeur')
+        ->join('trajets', 'trajets.id', '=', 'courses.id_trajet')
+       /* ->where('courses.id_vehicule', '=', 'vehicules.id')*/
+        ->where('courses.is_deleted', '=', 0)
+
+        ->orderBy('date_depart', 'desc')
+        ->get(
+            [
+                'courses.id','courses.date_depart', 'courses.heure_depart', 'courses.duree', 'courses.prix', 'courses.etat',
+                'vehicules.immatriculation', 'vehicules.nombre_de_place', 'chauffeurs.nom', 'chauffeurs.prenom', 'trajets.nom_trajet'
+            ]
+        );
+        }
         return view('pages/admin/courses/index',compact('courses'));
     }
 
@@ -52,17 +88,35 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $course = Course::create([
-            'date_depart' => $request->datedepart,
-            'heure_depart' => $request->heure,
-            'duree' => $request->duree,
-            'prix' => $request->prix,
-            'id_vehicule' => 1,
-            'etat' => 'activer',
-            'id_chauffeur' => 2,
-            'id_trajet' => $request->trajet,
-            'is_deleted' => 0
-        ]);
+        if (session('the_user')[0]->profil == 'Chauffeur'){
+            $course = Course::create([
+                'date_depart' => $request->datedepart,
+                'heure_depart' => $request->heure,
+                'duree' => $request->duree,
+                'prix' => $request->prix,
+                'id_vehicule' => 1,
+                'etat' => 'activer',
+                'id_chauffeur' => session('the_user')[0]->id,
+                'id_trajet' => $request->trajet,
+                'id_createur' => session('the_user')[0]->id,
+                'profil_createur' => session('the_user')[0]->profil,
+                'is_deleted' => 0
+            ]);
+        } else{
+            $course = Course::create([
+                'date_depart' => $request->datedepart,
+                'heure_depart' => $request->heure,
+                'duree' => $request->duree,
+                'prix' => $request->prix,
+                //'id_vehicule' => 1,
+                'etat' => 'activer',
+                //'id_chauffeur' => 2,
+                'id_trajet' => $request->trajet,
+                'id_createur' => session('the_user')[0]->id,
+                'profil_createur' => session('the_user')[0]->profil,
+                'is_deleted' => 0
+            ]);
+        }
         return redirect()->route('course.index');
     }
 
@@ -87,7 +141,7 @@ class CourseController extends Controller
                 ->where('courses.id', $course)
                 ->get([
                     'courses.id', 'courses.date_depart', 'courses.heure_depart',
-                    'courses.prix', 'courses.is_deleted', 'courses.etat'
+                    'courses.prix', 'courses.is_deleted', 'courses.etat', 'courses.profil_createur', 'courses.id_createur'
                 ]);
 
 

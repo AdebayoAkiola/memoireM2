@@ -23,92 +23,81 @@ use App\Http\Controllers\AuthController;
 
 /*Route::get('/', function () {
     return view('welcome');
-});*/
+});
+
+
+
+
+Route::group(['middleware' => 'Chauffeur'], function () {
+
+});
+
+
+Route::group(['middleware' => 'Client'], function () {
+
+
+});
+
+
+Route::group(['middleware' => 'Transporteur'], function () {
+
+
+});
+
+Route::group(['middleware' => 'Administrateur'], function () {
+});
+*/
+
 //Route::get('/', [welcomeController::class,'connexion']);
 Route::get('/', [AuthController::class, 'protect']);
 Route::get('welcome', [welcomeController::class,'connexion']);
-
 
 /* Connexion */
 Route::get('sign-in', [AuthController::class, 'sign_in']);
 Route::post('connexion', [AuthController::class, 'connexion']);
 Route::get('deconnexion', [AuthController::class, 'logout']);
 
-Route::group(['middleware' => 'Administrateur'], function () {
-    /* Gestion des chauffeurs */
-Route::resource('chauffeur', ChauffeurController::class);
-Route::resource('chauffeurStore', ChauffeurController::class);
-Route::get('chauffeur/status/{id}', [ChauffeurController::class, 'status']);
-
-    /* Gestion des transporteurs */
-    Route::resource('transporteur', TransporteurController::class);
-    Route::resource('transporteurStore', TransporteurController::class);
-    Route::resource('transporteurShow', TransporteurController::class);
-    Route::resource('transporteurStatus', TransporteurController::class);
-    Route::get('transporteur/status/{id}', [TransporteurController::class, 'status']);
-
-    /* Gestion des vehicules */
-    Route::resource('vehicule', VehiculeController::class);
-    Route::resource('vehiculeStore', VehiculeController::class);
-    Route::get('vehicule/status/{id}', [VehiculeController::class, 'status']);
-
-        /* Gestion des clients */
-Route::resource('client', ClientController::class);
+/* Gestion des clients */
 Route::resource('clientStore', ClientController::class);
+Route::resource('client', ClientController::class);
 Route::get('client/status/{id}', [ClientController::class, 'status']);
+Route::post('client/reservation', [CourseController::class, 'index']);
 
-/* Gestion des reservation */
-Route::resource('reservation', ReservationController::class);
-Route::resource('reservationStore', ReservationController::class);
-});
-
-Route::group(['middleware' => 'Chauffeur'], function () {
-    /* Gestion des trajets */
-/*Route::get('trajet/create', [TrajetController::class, 'create']);
-Route::get('trajet/index', [TrajetController::class, 'index']);
-*/
-Route::resource('trajet', TrajetController::class);
-Route::resource('trajetStore', TrajetController::class);
-Route::get('trajet/status/{id}', [TrajetController::class, 'status']);
-
-/* Gestion des chauffeurs */
-Route::resource('chauffeur', ChauffeurController::class);
+/* Gestion des chauffeur */
 Route::resource('chauffeurStore', ChauffeurController::class);
 Route::get('chauffeur/status/{id}', [ChauffeurController::class, 'status']);
+Route::resource('chauffeur', ChauffeurController::class);
+
+/* Gestion des transporteur */
+Route::resource('transporteurStore', TransporteurController::class);
+Route::resource('transporteur', TransporteurController::class);
+Route::resource('transporteurShow', TransporteurController::class);
+Route::resource('transporteurStatus', TransporteurController::class);
+Route::get('transporteur/status/{id}', [TransporteurController::class, 'status']);
+
+
+/* Gestion des trajets */
+Route::get('trajet/create', [TrajetController::class, 'create']);
+Route::get('trajet/index', [TrajetController::class, 'index']);
+Route::resource('trajet', TrajetController::class);
+//Route::resource('trajetStore', TrajetController::class);
+Route::get('trajet/status/{id}', [TrajetController::class, 'status']);
+Route::get('trajet/search-villes/{ville}', [TrajetController::class, 'searchVille']);
+Route::get('trajetClient/create', [TrajetController::class, 'create']);
 
 /* Gestion des courses */
 Route::resource('course', CourseController::class);
 Route::resource('courseStore', CourseController::class);
 Route::get('course/status/{id}', [CourseController::class, 'status']);
 
-});
-
-Route::group(['middleware' => 'Transporteur'], function () {
-    /* Gestion des transporteurs */
-Route::resource('transporteur', TransporteurController::class);
-Route::resource('transporteurStore', TransporteurController::class);
-Route::resource('transporteurShow', TransporteurController::class);
-Route::resource('transporteurStatus', TransporteurController::class);
-Route::get('transporteur/status/{id}', [TransporteurController::class, 'status']);
-
-/* Gestion des vehicules */
-Route::resource('vehicule', VehiculeController::class);
-Route::resource('vehiculeStore', VehiculeController::class);
-Route::get('vehicule/status/{id}', [VehiculeController::class, 'status']);
-
-/* Gestion des chauffeurs */
-Route::resource('chauffeur', ChauffeurController::class);
-Route::resource('chauffeurStore', ChauffeurController::class);
-Route::get('chauffeur/status/{id}', [ChauffeurController::class, 'status']);
-});
-
-Route::group(['middleware' => 'Client'], function () {
-    /* Gestion des clients */
-Route::resource('client', ClientController::class);
-Route::resource('clientStore', ClientController::class);
-Route::get('client/status/{id}', [ClientController::class, 'status']);
-
 /* Gestion des reservation */
+Route::get('reservationStore/{id}', [ReservationController::class, 'create']);
 Route::resource('reservation', ReservationController::class);
 Route::resource('reservationStore', ReservationController::class);
-});
+Route::get('reservation/index', [ClientController::class, 'index']);
+Route::post('reserver', [ReservationController::class, 'store']);
+
+/* Gestion des vehicules */
+Route::get('vehicule/status/{id}', [VehiculeController::class, 'status']);
+Route::get('vehicule/index', [VehiculeController::class, 'index']);
+Route::resource('vehicule', VehiculeController::class);

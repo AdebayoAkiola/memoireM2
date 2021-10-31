@@ -20,7 +20,7 @@
             <!-- Tab panels -->
             <div class="tab-content card">
                 <div class="tab-pane fade in show active" id="trajet" role="tabpanel">
-                        <form action="{{ route('trajet.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('client/reservation') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card card-signup z-depth-1">
 

@@ -27,7 +27,10 @@ class TrajetController extends Controller
      */
     public function create()
     {
-        return view('pages/admin/trajets/create');
+        if(session('the_user')[0]->profil == "Client")
+            return view('pages/admin/trajets/createClient');
+        else
+            return view('pages/admin/trajets/create');
     }
 
     /**
@@ -39,14 +42,43 @@ class TrajetController extends Controller
     public function store(Request $request)
     {
         //
+        $nomtrajet=Str::ucfirst($request->ville_depart.' ----->  '.$request->ville_darriver);
+        $get_trajet = Trajet::where('nom_trajet', $nomtrajet)->where('is_deleted', 0)->get(
+            [
+                'id'
+            ]
+        );
+        if (count($get_trajet) > 0) {
+            return view('pages/admin/courses/create', compact('get_trajet'));
+        } else{
         $trajet = Trajet::create([
             'ville_depart' => Str::ucfirst($request->ville_depart),
             'ville_darrivee' => Str::ucfirst($request->ville_darriver),
-            'nom_trajet' => Str::ucfirst($request->ville_depart.' ----->  '.$request->ville_darriver),
+            'nom_trajet' => $nomtrajet,
             'is_deleted' => 0
         ]);
+        $get_trajet = Trajet::where('nom_trajet', $nomtrajet)->where('is_deleted', 0)->get(
+            [
+                'id'
+            ]
+        );
+        if(session('the_user')[0]->profil == "Chauffeur")
+            return view('pages/admin/courses/create', compact('get_trajet'));
+       /* elseif(session('the_user')[0]->profil == "Client")
+            return view('pages/admin/courses/index', compact('get_trajet'));*/
+        else
+        return view('pages/admin/courses/index', compact('get_trajet'));
+        }
+    }
 
-        return redirect()->route('trajet.index');
+    public function searchVille($nom_ville)
+    {
+        // get records from database
+        $ville['data'] = DB::table('trajets')
+            ->where('ville_depart', 'like', '%'.$nom_ville.'%')
+            ->where('is_deleted', 0)->get();
+        echo json_encode($ville);
+        exit;
     }
 
     /**

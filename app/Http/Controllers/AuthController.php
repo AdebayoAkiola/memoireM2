@@ -66,13 +66,15 @@ class AuthController extends Controller
                 return redirect('sign-in')->with('auth_error', 'auth_error');
             }
         } elseif ($get_profil == 'ad') {
-            $get_login = User::where('login', $request->login)->where('etat', 'activer')->where('is_deleted', 0)->get(
+            $get_login = Administrateur::where('login', $request->login)->where('etat', 'activer')->where('is_deleted', 0)->get(
                 [
                     'id', 'login', 'prenom', 'nom', 'telephone', 'etat', 'photo', 'email'
                 ]
             );
+            //dd($get_login);
             if (count($get_login) > 0) {
-                $get_password = User::where('login', $get_login[0]->login)->get();
+                //dd($get_login);
+                $get_password = Administrateur::where('login', $get_login[0]->login)->get();
                 if (Hash::check($request->mot_de_passe, $get_password[0]->password)) {
                     $get_login[0]->profil='Administrateur';
                     $request->session()->put('the_user', $get_login);

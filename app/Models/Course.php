@@ -10,6 +10,6 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'date_depart', 'heure_depart', 'duree', 'prix', 'id_vehicule', 'id_chauffeur', 'id_trajet','is_deleted','etat',
+        'id', 'date_depart', 'heure_depart', 'duree', 'prix', 'id_vehicule', 'id_chauffeur', 'id_trajet','is_deleted','etat', 'id_createur','profil_createur'
     ];
 }

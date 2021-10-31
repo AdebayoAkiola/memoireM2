@@ -20,6 +20,7 @@ class CreateChauffeursTable extends Migration
             $table->string('prenom');
             $table->string('nom');
             $table->integer('note');
+            $table->string('permis');
             $table->unsignedBigInteger('id_transporteur')->nullable();
             $table->string('telephone')->unique();
             $table->string('email')->nullable();

@@ -12,7 +12,7 @@
         <!-- Gird column -->
         <div class="col-md-12">
 
-            <h5 class="my-4 dark-grey-text font-weight-bold">Liste l'ensemble de des trajets</h5>
+            <h5 class="my-4 dark-grey-text font-weight-bold">Liste de l'ensemble des chauffeurs</h5>
 
             <div class="card">
                 <div class="card-body">
@@ -21,33 +21,67 @@
                             <tr>
                                 <th></th>
                                 <th class="th-sm">
-                                    Code
+                                    Id
                                 </th>
                                 <th class="th-sm">
-                                    Nom Article
+                                    Date de depart
                                 </th>
                                 <th class="th-sm">
-                                    Description
+                                    Heure
                                 </th>
                                 <th class="th-sm">
-                                    Prix
+                                    Duree estimee
                                 </th>
                                 <th class="th-sm">
-                                    Quantité
+                                    prix
+                                </th>
+                                <th class="th-sm">
+                                    Plaque vehicule
+                                </th>
+                                <th class="th-sm">
+                                    Nombre de place
+                                </th>
+                                <th class="th-sm">
+                                    Chauffeur
+                                </th>
+                                <th class="th-sm">
+                                    Trajet
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
 
-                                <tr>
-                                    <td></td>
-                                    <td>first</td>
-                                    <td>test</td>
-                                    <td>for</td>
-                                    <td>trajet</td>
-                                    <td>result</td>
-                                </tr>
-                            {{-- @endforeach --}}
+                            @foreach ($courses as $course)
+                            <tr>
+                                <td></td>
+                                <td>{{ $course->id }}</td>
+                                <td>{{ $course->date_depart }}</td>
+                                <td>{{ $course->heure_depart }}</td>
+                                <td>{{ $course->duree }}</td>
+                                <td>{{ $course->prix }}</td>
+                                <td>{{ $course->immatriculation }}</td>
+                                <td>{{ $course->nombre_de_place  }}</td>
+                                <td>{{ $course->prenom  }} {{ $course->nom  }}</td>
+                                <td>{{ $course->nom_trajet }}</td>
+                                <td class="form-inline">
+                                    <a>
+                                        <form action="#" method="post"
+                                            onsubmit=" return confirm('Voulez-vous vous souscrire a la course : {{ $course->id }} ?')">
+                                            {{ csrf_field() }}
+                                            {{--@method('DELETE')--}}
+                                            <button type="submit"
+                                                class="btn btn-sm btn-info" title="Supprimer">
+                                                <i class="fa fa-trash fa-lg fa-fw" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </a>
+                                   <!-- <a href="{{ route('course.show', $course->id) }}" data-toggle="tooltip"
+                                        data-placement="top" title="Voir" class="text-primary">
+                                        <i class="w-fa fas fa-user"></i>
+                                    </a> -->
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

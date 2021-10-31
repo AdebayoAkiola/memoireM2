@@ -22,6 +22,8 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('id_vehicule')->nullable();
             $table->unsignedBigInteger('id_trajet');
             $table->unsignedBigInteger('id_chauffeur')->nullable();
+            $table->String('profil_createur');
+            $table->integer('id_createur');
             $table->enum('etat', ['desactiver', 'activer', 'suspendus']);
             $table->integer('is_deleted');
             $table->timestamps();
